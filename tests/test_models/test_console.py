@@ -1,11 +1,8 @@
 #!/usr/bin/python3
 """unittests for BaseModel"""
-import json
-from datetime import datetime
-from models import storage
 import unittest
-
 from models.base_model import BaseModel
+from datetime import datetime
 
 
 class TestBaseModel(unittest.TestCase):
@@ -33,6 +30,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn("created_at", inst_dict)
         self.assertIn("updated_at", inst_dict)
         self.assertIn("id", inst_dict)
+
+        self.assertEqual(inst_dict["__class__"], "BaseModel")
+        self.assertIsInstance(inst_dict["created_at"], str)
+        self.assertIsInstance(inst_dict["updated_at"], str)
+        self.assertIsInstance(inst_dict["id"], str)
 
     def test_str(self):
         """test __str__ method"""
