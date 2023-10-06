@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 """entry point of command interpreter"""
-
 import cmd
 
 
 class HBNBCommand(cmd.Cmd):
     """prompts user for input"""
-    prompt = "tell me what to do "
+    prompt = "(hbnb)"
 
     def do_quit(self, arg):
         """quit command to exit program"""
