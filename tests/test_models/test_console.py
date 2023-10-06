@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""unittests for BaseModel"""
 import json
 import unittest
 
@@ -32,7 +32,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn("updated_at", inst_dict)
         self.assertIn("id", inst_dict)
 
-    def test_str(self)
+    def test_str(self):
         """test __str__ method"""
         base_model = BaseModel()
         str_rep = str(base_model)
