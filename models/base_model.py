@@ -34,9 +34,9 @@ class BaseModel:
         datetime = "%Y-%m-%dT%H:%M:%S.%f"
         obj_dict = OrderedDict()
         obj_dict["__class__"] = self.__class__.__name__
+        obj_dict["updated_at"] = self.updated_at.strftime(datetime)
         obj_dict["id"] = self.id
         obj_dict["created_at"] = self.created_at.strftime(datetime)
-        obj_dict["updated_at"] = self.updated_at.strftime(datetime)
         obj_dict.update(self.__dict__)
         return obj_dict
 
@@ -46,6 +46,5 @@ class BaseModel:
         items = [
             f"{key}: {value} ({type(value)})" for key, value in obj_dict.items()
         ]
-        return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__
-        )
+        return "[{self.__class__.__name__}] ( \
+        {self.id}) " + '{' + ', '.join(items) + '}'
