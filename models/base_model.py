@@ -3,9 +3,10 @@
 import uuid
 import models
 from datetime import datetime
+from models import storage
 
 
-class BaseModel:
+class BaseModel():
     """Base class for the console clone"""
     def __init__(self, *args, **kwargs):
         if kwargs:
@@ -15,21 +16,23 @@ class BaseModel:
             for key in k_dict:
                 if (key == "created_at" or key == "updated_at"):
                     k_dict[key] = datetime.strptime(k_dict[key], date_format)
-            self.__dfict__ = k_dict
+            self.__dict__ = k_dict
 
         else:
             """Assigning a unique ID as a string"""
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
-        """Reformating string repr"""
+        """Reformating string representation"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Updating the update_at attr with current datetime"""
         self.updated_at = datetime.now()
+        storage.save(self)
 
     def to_dict(self):
         """Making a new_dict with extra field for __class__"""
