@@ -9,6 +9,7 @@ class BaseModel():
     """Base class for the console clone"""
     def __init__(self, *args, **kwargs):
         if kwargs:
+
             date_format = "%Y-%m-%dT%H:%M:%S.%f"
             k_dict = kwargs.copy()
             del k_dict["__class__"]
@@ -16,7 +17,6 @@ class BaseModel():
                 if (key == "created_at" or key == "updated_at"):
                     k_dict[key] = datetime.strptime(k_dict[key], date_format)
             self.__dict__ = k_dict
-
         else:
             """Assigning a unique ID as a string"""
             self.id = str(uuid.uuid4())
