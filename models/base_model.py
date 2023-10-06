@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """Base Model"""
-import uuid
-import models
 from datetime import datetime
+import uuid
 from models import storage
 
 
@@ -21,17 +20,18 @@ class BaseModel():
         else:
             """Assigning a unique ID as a string"""
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.created_at = datetime.today()
+            self.updated_at = datetime.today()
             storage.new(self)
 
     def __str__(self):
         """Reformating string representation"""
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                    self.id, self.__dict__)
 
     def save(self):
         """Updating the update_at attr with current datetime"""
-        self.updated_at = datetime.now()
+        self.updated_at = datetime.today()
         storage.save(self)
 
     def to_dict(self):
