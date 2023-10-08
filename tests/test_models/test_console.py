@@ -74,5 +74,6 @@ class TestBaseModel(unittest.TestCase):
         deserialized_base = BaseModel(**serialized_data)
         self.assertEqual(base_1, deserialized_base)
 
+
 if __name__ == "__main__":
     unittest.main()
