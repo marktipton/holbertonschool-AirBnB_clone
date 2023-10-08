@@ -1,16 +1,14 @@
 #!/usr/bin/python3
 """Base Model"""
-import uuid
 from datetime import datetime
-from collections import OrderedDict
+import uuid
+import models
+from models import storage
 
 
-class BaseModel:
+class BaseModel():
     """Base class for the console clone"""
     def __init__(self, *args, **kwargs):
-        self.id = None
-        self.created_at = None
-        self.updated_at = None
 
         if kwargs:
             for key, value in kwargs.items():
@@ -24,6 +22,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """Reformating string repr"""
@@ -33,6 +32,7 @@ class BaseModel:
     def save(self):
         """Updating the update_at attr with current datetime"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Making a dictionary repr of this instance"""
