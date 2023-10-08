@@ -25,26 +25,19 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
 
+    def __str__(self):
+        """Reformating string repr"""
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
+
     def save(self):
         """Updating the update_at attr with current datetime"""
         self.updated_at = datetime.now()
 
     def to_dict(self):
         """Making a dictionary repr of this instance"""
-        datetime = "%Y-%m-%dT%H:%M:%S.%f"
-        obj_dict = OrderedDict()
-        obj_dict["__class__"] = self.__class__.__name__
-        obj_dict["updated_at"] = self.updated_at.strftime(datetime)
-        obj_dict["id"] = self.id
-        obj_dict["created_at"] = self.created_at.strftime(datetime)
-        obj_dict.update(self.__dict__)
-        return obj_dict
-
-    def __str__(self):
-        """Reformating string repr"""
-        obj_dict = self.to_dict()
-        items = [
-            f"{key}: {value} ({type(value)})" for key, value in obj_dict.items()
-        ]
-        return "[{self.__class__.__name__}] ( \
-        {self.id}) " + '{' + ', '.join(items) + '}'
+        new_dict = self.__dict__.copy()
+        new_dict["__class__"] = self.__class__.__name__
+        new_dict["updated_at"] = self.updated_at.isoformat()
+        new_dict["created_at"] = self.created_at.isoformat()
+        return new_dict
