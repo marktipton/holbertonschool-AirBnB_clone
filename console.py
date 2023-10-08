@@ -5,6 +5,7 @@ import json
 import os
 import uuid
 from datetime import datetime
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     """prompts user for input"""
