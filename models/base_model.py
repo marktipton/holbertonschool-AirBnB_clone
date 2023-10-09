@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Base Model"""
-from datetime import datetime
 import uuid
-import models
 from models import storage
+from datetime import datetime
 
 
 class BaseModel():
@@ -37,7 +36,7 @@ class BaseModel():
     def to_dict(self):
         """Making a dictionary repr of this instance"""
         new_dict = self.__dict__.copy()
-        new_dict["__class__"] = self.__class__.__name__
         new_dict["updated_at"] = self.updated_at.isoformat()
         new_dict["created_at"] = self.created_at.isoformat()
+        new_dict["__class__"] = self.__class__.__name__
         return new_dict
