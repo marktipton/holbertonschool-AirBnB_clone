@@ -2,7 +2,6 @@
 """FileStorage that serializes to a JSON file and deserializes
 files to instances"""
 import json
-import os
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -28,32 +27,36 @@ class FileStorage():
     def save(self):
         """Serializes __objects to JSON file"""
         serialized_objects = {}
-        for key, value in FileStorage.__objects:
-            serialized_objects[key] = FileStorage.__objects[key].to_dict()
+        for key, value in FileStorage.__objects.items():
+            serialized_objects[key] = value.to_dict()
         with open(FileStorage.__file_path, 'w') as json_path:
             json.dump(serialized_objects, json_path)
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
+        class_mapping = {
+            "User": User,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Place": Place,
+            "Review": Review,
+        }
+
         try:
             with open(FileStorage.__file_path, 'r') as json_file:
                 data = json.load(json_file)
                 for value in data.values():
-                    obj_class = value["__class__"]
-                    del value["__class__"]
-                    if obj_class == User:
-                        self.new(User(**value))
-                    elif obj_class == State:
-                        self.new(State(**value))
-                    elif obj_class == City:
-                        self.new(City(**value))
-                    elif obj_class == Amenity:
-                        self.new(Amenity(**value))
-                    elif obj_class == Place:
-                        self.new(Place(**value))
-                    elif obj_class == Review:
-                        self.new(Review(**value))
-                    else:
-                        pass
+                    obj_class_name = value.get("__class__")
+                    if obj_class_name in class_mapping:
+                        del value["__class__"]
+                        obj_class = class_mapping[obj_class_name]
+                        try:
+                            obj = obj_class(**value)
+                            self.new(obj)
+                        except Exception as e:
+                            print(f"Error loading data from JSON: {e}")
         except FileNotFoundError:
             pass
+        except Exception as e:
+            print(f"Error loading data from JSON: {e}")
