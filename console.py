@@ -50,6 +50,12 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
+        instance_id = args[1]
+        key = class_name + '.' + instance_id
+        if key in BaseModel.__objects:
+            print(BaseModel.__objects[key])
+        else:
+            print("** no instance found **")
 
     def do_destroy(self, arg):
         """destroys instance of BaseModel"""
@@ -65,6 +71,13 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 2:
             print("** instance id missing **")
             return
+
+        instance_id = args[1]
+        key = class_name + '.' + instance_id
+        if key in BaseModel.__objects:
+            del BaseModel.__objects[key]
+        else:
+            print("** no instance found **")
 
     def do_all(self, arg):
         """prints string rep of all instances of BaseModel"""
@@ -89,6 +102,25 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 2:
             print("** instance id missing **")
             return
+
+        instance_id = args[1]
+        key = class_name + '.' + instance_id
+        if key in BaseModel.__objects:
+            if len(args) < 3:
+                print ("** attribute name missing **")
+            if len(args) < 4:
+                print("** value missing **")
+                return
+
+            attr_name = args[2]
+            attr_value = args[3]
+
+            if key in BaseModel.__objects:
+                obj = BaseModel.__objects[key]
+            setattr(obj, attr_name, attr_value)
+            obj.save()
+        else:
+            print("** no instance found **")
 
 
 if __name__ == '__main__':
