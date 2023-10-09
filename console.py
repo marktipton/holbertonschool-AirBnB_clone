@@ -6,6 +6,7 @@ import os
 import uuid
 from datetime import datetime
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 class HBNBCommand(cmd.Cmd):
     """prompts user for input"""
@@ -52,8 +53,8 @@ class HBNBCommand(cmd.Cmd):
 
         instance_id = args[1]
         key = class_name + '.' + instance_id
-        if key in BaseModel.__objects:
-            print(BaseModel.__objects[key])
+        if key in FileStorage.__objects:
+            print(FileStorage.__objects[key])
         else:
             print("** no instance found **")
 
@@ -74,8 +75,8 @@ class HBNBCommand(cmd.Cmd):
 
         instance_id = args[1]
         key = class_name + '.' + instance_id
-        if key in BaseModel.__objects:
-            del BaseModel.__objects[key]
+        if key in FileStorage.__objects:
+            del FileStorage.__objects[key]
         else:
             print("** no instance found **")
 
@@ -84,7 +85,8 @@ class HBNBCommand(cmd.Cmd):
         if arg != "BaseModel":
             print("** class doesn't exist **")
             return
-        for instance in BaseModel.instances:
+        objects = FileStorage.__objects.copy()
+        for instance in objects.values():
             instance_string = instance.to_dict()
             print(instance_string)
 
@@ -105,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
 
         instance_id = args[1]
         key = class_name + '.' + instance_id
-        if key in BaseModel.__objects:
+        if key in FileStorage.__objects:
             if len(args) < 3:
                 print ("** attribute name missing **")
             if len(args) < 4:
@@ -115,8 +117,8 @@ class HBNBCommand(cmd.Cmd):
             attr_name = args[2]
             attr_value = args[3]
 
-            if key in BaseModel.__objects:
-                obj = BaseModel.__objects[key]
+            if key in FileStorage.__objects:
+                obj = FileStorage.__objects[key]
             setattr(obj, attr_name, attr_value)
             obj.save()
         else:
