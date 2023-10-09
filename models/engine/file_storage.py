@@ -17,7 +17,7 @@ class FileStorage():
 
     def all(self):
         """Returns the dict __objects"""
-        return FileStorage.__objects
+        return (FileStorage.__objects)
 
     def new(self, obj):
         """Sets in __objects the obj w/ key <obj class name>.id"""
@@ -29,8 +29,8 @@ class FileStorage():
         serialized_objects = {}
         for key, value in FileStorage.__objects.items():
             serialized_objects[key] = value.to_dict()
-        with open(FileStorage.__file_path, 'w') as json_path:
-            json.dump(serialized_objects, json_path)
+        with open(FileStorage.__file_path, 'w') as json_file:
+            json.dump(serialized_objects, json_file)
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
@@ -53,9 +53,9 @@ class FileStorage():
                         obj_class = class_mapping[obj_class_name]
                         try:
                             obj = obj_class(**value)
-                            self.new(obj)
+                            FileStorage.new(obj)
                         except Exception as e:
-                            print(f"Error loading data from JSON: {e}")
+                            print(f"Error creating object: {e}")
         except FileNotFoundError:
             pass
         except Exception as e:
