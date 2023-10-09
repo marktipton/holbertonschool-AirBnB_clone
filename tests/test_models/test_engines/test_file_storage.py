@@ -3,8 +3,8 @@
 import unittest
 import os
 import json
-from models import storage
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 from models.user import User
 from models.state import State
 from models.city import City
@@ -16,12 +16,12 @@ from models.review import Review
 class TestFileStorage(unittest.TestCase):
     def setUp(self):
         """instance for testing"""
-        self.storage = storage.FileStorage()
+        self.storage = FileStorage()
 
     def tearDown(self):
         """clean up after testing"""
-        if os.path.exists(storage.FileStorage.__file_path):
-            os.remove(storage.FileStorage.__file_path)
+        if os.path.exists(FileStorage.__file_path):
+            os.remove(FileStorage.__file_path)
 
     def test_all(self):
         """test all method"""
@@ -40,7 +40,7 @@ class TestFileStorage(unittest.TestCase):
         user = User()
         self.storage.new(user)
         self.storage.save()
-        with open(storage.FileStorage.__file_path, 'r') as f:
+        with open(FileStorage.__file_path, 'r') as f:
             data = json.load(f)
         key = "User." + str(user.id)
         self.assertTrue(key in data)
