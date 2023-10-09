@@ -43,17 +43,17 @@ class FileStorage:
                 for value in data.values():
                     obj_class = value["__class__"]
                     del value["__class__"]
-                    if obj_class == "User":
+                    if obj_class == User:
                         self.new(User(**value))
-                    elif obj_class == "State":
+                    elif obj_class == State:
                         self.new(State(**value))
-                    elif obj_class == "City":
+                    elif obj_class == City:
                         self.new(City(**value))
-                    elif obj_class == "Amenity":
+                    elif obj_class == Amenity:
                         self.new(Amenity(**value))
-                    elif obj_class == "Place":
+                    elif obj_class == Place:
                         self.new(Place(**value))
-                    elif obj_class == "Review":
+                    elif obj_class == Review:
                         self.new(Review(**value))
                     else:
                         pass
