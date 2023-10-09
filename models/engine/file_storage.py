@@ -12,33 +12,31 @@ from models.place import Place
 from models.review import Review
 
 
-class FileStorage:
+class FileStorage():
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
         """Returns the dict __objects"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """Sets in __objects the obj w/ key <obj class name>.id"""
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj
+        key = obj.__class__.__name__ + "." + str(obj.id)
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """Serializes __objects to JSON file"""
         serialized_objects = {}
-        for key, value in self.__objects.items():
-            serialized_objects[key] = value.to_dict()
-
-        with open(self.__file_path, 'w') as json_file:
-            json.dump(serialized_objects, json_file,
-                      default=lambda x: x.__dict__)
+        for key, value in FileStorage.__objects:
+            serialized_objects[key] = FileStorage.__objects[key].to_dict()
+        with open(FileStorage.__file_path, 'w') as json_path:
+            json.dump(serialized_objects, json_path)
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
         try:
-            with open(self.__file_path, 'r') as json_file:
+            with open(FileStorage.__file_path, 'r') as json_file:
                 data = json.load(json_file)
                 for value in data.values():
                     obj_class = value["__class__"]
