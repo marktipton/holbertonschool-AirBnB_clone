@@ -14,11 +14,15 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """prompts user for input"""
     prompt = "(hbnb) "
-    classes = {"BaseModel", "User", "State",
-                "City", "Amenity", "Place", "Review"}
+    classes = {
+        "BaseModel", "User", "State",
+        "City", "Amenity", "Place", "Review"
+    }
+
     def do_quit(self, arg):
         """quit command to exit program"""
         return True
@@ -130,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
         objects = FileStorage().all()
         if key in objects:
             if len(args) < 3:
-                print ("** attribute name missing **")
+                print("** attribute name missing **")
             if len(args) < 4:
                 print("** value missing **")
                 return
