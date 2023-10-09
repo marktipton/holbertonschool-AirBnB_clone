@@ -3,9 +3,10 @@
 files to instances"""
 import json
 import os
+from models.base_model import BaseModel
 
 
-class FileStorage():
+class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
@@ -15,7 +16,7 @@ class FileStorage():
 
     def new(self, obj):
         """Sets in __objects the obj w/ key <obj class name>.id"""
-        key = obj.__class__.__name__ + "." + str(obj.id)
+        key = f"{obj.__class__.__name__}.{obj.id}"
         self.__objects[key] = obj
 
     def save(self):
@@ -25,16 +26,17 @@ class FileStorage():
             serialized_objects[key] = value.to_dict()
 
         with open(self.__file_path, 'w') as json_file:
-            json.dump(serialized_objects, json_file)
+            json.dump(serialized_objects, json_file,
+                      default=lambda x: x.__dict__)
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
         try:
             with open(self.__file_path, 'r') as json_file:
                 data = json.load(json_file)
-                for key, value in data.items():
-                    class_name = value["__class__"]
-                    obj = globals()[class_name](**value)
-                    self.__objects[key] = obj
+                for value in data.values():
+                    obj_class = value["__class__"]
+                    del value["__class__"]
+                    self.new(eval(obj_class)(**value))
         except FileNotFoundError:
             pass
