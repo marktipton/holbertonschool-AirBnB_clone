@@ -4,6 +4,12 @@ files to instances"""
 import json
 import os
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
@@ -37,6 +43,19 @@ class FileStorage:
                 for value in data.values():
                     obj_class = value["__class__"]
                     del value["__class__"]
-                    self.new(eval(obj_class)(**value))
+                    if obj_class == "User":
+                        self.new(User(**value))
+                    elif obj_class == "State":
+                        self.new(State(**value))
+                    elif obj_class == "City":
+                        self.new(City(**value))
+                    elif obj_class == "Amenity":
+                        self.new(Amenity(**value))
+                    elif obj_class == "Place":
+                        self.new(Place(**value))
+                    elif obj_class == "Review":
+                        self.new(Review(**value))
+                    else:
+                        pass
         except FileNotFoundError:
             pass
