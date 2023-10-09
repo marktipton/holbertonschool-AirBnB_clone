@@ -71,7 +71,7 @@ class TestBaseModel(unittest.TestCase):
         with self.assertRaises(ValueError):
             base_1 = BaseModel(created_at="invalid_datetimte_format")
 
-    def test_serialize(test):
+    def test_serialize(self):
         """test serialization and deserialization"""
         base_1 = BaseModel()
         serialized_data = base_1.to_dict()
