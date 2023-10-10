@@ -3,7 +3,7 @@
 import unittest
 import json
 import os
-import pep8
+import pycodestyle
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
@@ -12,26 +12,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-
-
-class TestFileStorageDoc(unittest.TestCase):
-    """check FileStorage documentation"""
-    def test_class_documentation(self):
-        self.assertTrue(len(FileStorage.__doc__) > 0)
-
-
-class TestFileStoragePycode(unittest.TestCase):
-    """check pycodestyle"""
-    def test_pycode(self):
-        pep8style = pep8.StyleGuide(quiet=True)
-        files = [
-            'models/engine/file_storage.py'
-            'tests/test_models/test_engine/test_file_storage.py'
-        ]
-        result = pep8style.check_files(files)
-        self.assertEqual(
-            result.total_errors, 0, "PEP 8 style issues found"
-        )
 
 
 class TestFileStorage(unittest.TestCase):
@@ -43,6 +23,25 @@ class TestFileStorage(unittest.TestCase):
         """clean up after testing"""
         if os.path.exists(FileStorage.__file_path):
             os.remove(FileStorage.__file_path)
+
+    def test_pycode(self):
+        style = pycodestyle.StyleGuide(quiet=True)
+        files = [
+            'models/engine/file_storage.py'
+            'tests/test_models/test_engine/test_file_storage.py'
+        ]
+        result = style.check_files(files)
+        self.assertEqual(
+            result.total_errors, 0, "PEP 8 style issues found"
+        )
+
+    def test_documentation(self):
+        check_class = [FileStorage]
+        for cls in check_class:
+            self.assertTrue(
+                cls.__doc__ is not None and len(cls.__doc__strip()) > 0,
+                f"Missing docstring in {cls.__name__}"
+            )
 
     def test_all(self):
         """test all method"""
