@@ -44,7 +44,7 @@ class FileStorage:
         }
         try:
             with open(FileStorage.__file_path, 'r') as f:
-                for key, value in json.load(f).itmes():
+                for key, value in json.load(f).items():
                     obj_class_name = value.get("__class__")
                     if obj_class_name in class_mapping:
                         del value["__class__"]
