@@ -11,7 +11,7 @@ from models.place import Place
 from models.review import Review
 
 
-class FileStorage():
+class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
@@ -42,11 +42,10 @@ class FileStorage():
             "Place": Place,
             "Review": Review,
         }
-
         try:
             with open(FileStorage.__file_path, 'r') as f:
-                for key, value in json.load(f).items():
-                    obj_class_name = value.get["__class__"]
+                for key, value in json.load(f).itmes():
+                    obj_class_name = value.get("__class__")
                     if obj_class_name in class_mapping:
                         del value["__class__"]
                         obj_class = class_mapping[obj_class_name]
