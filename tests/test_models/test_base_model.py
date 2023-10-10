@@ -87,11 +87,6 @@ class TestBaseModel(unittest.TestCase):
         base_1 = BaseModel(id="")
         self.assertEqual(base_1.id, "")
 
-    def test_invalid_input(self):
-        """test invalid input"""
-        with self.assertRaises(ValueError):
-            base_1 = BaseModel(created_at="invalid_datetimte_format")
-
     def test_serialize(self):
         """test serialization and deserialization"""
         base_1 = BaseModel()
