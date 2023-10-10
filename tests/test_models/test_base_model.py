@@ -28,7 +28,7 @@ class TestBaseModelPycode(unittest.TestCase):
 
 class TestBaseModel(unittest.TestCase):
     """tests for BaseModel"""
-    def setUp(self):
+    def setUp(cls):
         """setUp code for tests"""
         pass
 
