@@ -44,10 +44,9 @@ class FileStorage():
         }
 
         try:
-            with open(FileStorage.__file_path, 'r') as json_file:
-                data = json.load(json_file)
-                for value in data.values():
-                    obj_class_name = value.get("__class__")
+            with open(FileStorage.__file_path, 'r', encoding="UTF8") as f:
+                for key, value in json.load(f).items():
+                    obj_class_name = eval(value["__class__"])(**value)
                     if obj_class_name in class_mapping:
                         del value["__class__"]
                         obj_class = class_mapping[obj_class_name]
@@ -58,5 +57,3 @@ class FileStorage():
                             print(f"Error creating object: {e}")
         except FileNotFoundError:
             pass
-        except Exception as e:
-            print(f"Error loading data from JSON: {e}")
