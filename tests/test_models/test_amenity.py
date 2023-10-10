@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 class TestAmenityDoc(unittest.TestCase):
-    """check FileStorage documentation"""
+    """check Amenity documentation"""
     def test_class_documentation(self):
         self.assertTrue(len(Amenity.__doc__) > 0)
 
