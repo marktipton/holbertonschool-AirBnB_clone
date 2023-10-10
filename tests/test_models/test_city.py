@@ -1,8 +1,29 @@
 #!/usr/bin/python3
 """unittests for City"""
 import unittest
+import pep8
 from models.city import City
 from datetime import datetime
+
+
+class TestCityDoc(unittest.TestCase):
+    """check FileStorage documentation"""
+    def test_class_documentation(self):
+        self.assertTrue(len(City.__doc__) > 0)
+
+
+class TestCityPycode(unittest.TestCase):
+    """check pycodestyle"""
+    def test_pycode(self):
+        pep8style = pep8.StyleGuide(quiet=True)
+        files = [
+            'models/city.py'
+            'tests/test_models/test_city.py'
+        ]
+        result = pep8style.check_files(files)
+        self.assertEqual(
+            result.total_errors, 0, "PEP 8 style issues found"
+        )
 
 
 class TestCity(unittest.TestCase):
