@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """unittests for FileStorage"""
 import unittest
-import os
 import json
+import os
+import pep8
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
@@ -11,6 +12,26 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+
+
+class TestFileStorageDoc(unittest.TestCase):
+    """check FileStorage documentation"""
+    def test_class_documentation(self):
+        self.assertTrue(len(FileStorage.__doc__) > 0)
+
+
+class TestFileStoragePycode(unittest.TestCase):
+    """check pycodestyle"""
+    def test_pycode(self):
+        pep8style = pep8.StyleGuide(quiet=True)
+        files = [
+            'models/engine/file_storage.py'
+            'tests/test_models/test_engine/test_file_storage.py'
+        ]
+        result = pep8style.check_files(files)
+        self.assertEqual(
+            result.total_errors, 0, "PEP 8 style issues found"
+        )
 
 
 class TestFileStorage(unittest.TestCase):
