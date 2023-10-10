@@ -11,30 +11,31 @@ from models.place import Place
 from models.review import Review
 
 
-class FileStorage:
+class FileStorage():
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
         """Returns the dict __objects"""
-        return (FileStorage.__objects)
+        return (self.__objects)
 
     def new(self, obj):
         """Sets in __objects the obj w/ key <obj class name>.id"""
         key = obj.__class__.__name__ + "." + str(obj.id)
-        FileStorage.__objects[key] = obj
+        self.__objects[key] = obj
 
     def save(self):
         """Serializes __objects to JSON file"""
         serialized_objects = {}
-        for key, value in FileStorage.__objects.items():
+        for key, value in self.__objects.items():
             serialized_objects[key] = value.to_dict()
-        with open(FileStorage.__file_path, 'w') as json_path:
+        with open(self.__file_path, 'w') as json_path:
             json.dump(serialized_objects, json_path)
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
         class_mapping = {
+            "BaseModel": BaseModel,
             "User": User,
             "State": State,
             "City": City,
@@ -43,7 +44,7 @@ class FileStorage:
             "Review": Review,
         }
         try:
-            with open(FileStorage.__file_path, 'r') as f:
+            with open(self.__file_path, 'r') as f:
                 for key, value in json.load(f).items():
                     obj_class_name = value.get("__class__")
                     if obj_class_name in class_mapping:
@@ -53,6 +54,6 @@ class FileStorage:
                             obj = obj_class(**value)
                             self.new(obj)
                         except Exception as e:
-                            pass
+                            print(f"Error loading data from JSON: {e}")
         except FileNotFoundError:
             pass
