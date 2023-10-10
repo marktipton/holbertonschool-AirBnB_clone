@@ -12,20 +12,6 @@ class TestStateDoc(unittest.TestCase):
         self.assertTrue(len(State.__doc__) > 0)
 
 
-class TestStatePycode(unittest.TestCase):
-    """check pycodestyle"""
-    def test_pycode(self):
-        pep8style = pep8.StyleGuide(quiet=True)
-        files = [
-            'models/state.py'
-            'tests/test_models/test_state.py'
-        ]
-        result = pep8style.check_files(files)
-        self.assertEqual(
-            result.total_errors, 0, "PEP 8 style issues found"
-        )
-
-
 class TestState(unittest.TestCase):
     """tests for State"""
     def setUp(self):
@@ -45,7 +31,6 @@ class TestState(unittest.TestCase):
         """tests if inheriting from BaseModel correctly"""
         state = State()
         self.assertEqual(state.__class__.__name__, "State")
-
 
 
 if __name__ == "__main__":

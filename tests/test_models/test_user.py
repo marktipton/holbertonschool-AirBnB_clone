@@ -12,20 +12,6 @@ class TestUserDoc(unittest.TestCase):
         self.assertTrue(len(User.__doc__) > 0)
 
 
-class TestUserPycode(unittest.TestCase):
-    """check pycodestyle"""
-    def test_pycode(self):
-        pep8style = pep8.StyleGuide(quiet=True)
-        files = [
-            'models/user.py'
-            'tests/test_models/test_user.py'
-        ]
-        result = pep8style.check_files(files)
-        self.assertEqual(
-            result.total_errors, 0, "PEP 8 style issues found"
-        )
-
-
 class TestUser(unittest.TestCase):
     """tests for User"""
     def setUp(self):

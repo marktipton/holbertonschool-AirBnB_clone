@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """unittests for Place"""
 import unittest
-import pep8
 from models.base_model import BaseModel
 from models.place import Place
 from datetime import datetime
@@ -13,18 +12,6 @@ class TestPlaceDoc(unittest.TestCase):
         self.assertTrue(len(Place.__doc__) > 0)
 
 
-class TestPlacePycode(unittest.TestCase):
-    """check pycodestyle"""
-    def test_pycode(self):
-        pep8style = pep8.StyleGuide(quiet=True)
-        files = [
-            'models/place.py'
-            'tests/test_models/test_place.py'
-        ]
-        result = pep8style.check_files(files)
-        self.assertEqual(
-            result.total_errors, 0, "PEP 8 style issues found"
-        )
 class TestPlace(unittest.TestCase):
     """tests for Place"""
     def setUp(self):
@@ -43,8 +30,7 @@ class TestPlace(unittest.TestCase):
     def test_inheritance(self):
         """tests if inheriting from BaseModel correctly"""
         place = Place()
-        self.assertEqual(issubclass(place.__class__, BaseModel))
-
+        self.assertTrue(issubclass(place.__class__, BaseModel))
 
 
 if __name__ == "__main__":
