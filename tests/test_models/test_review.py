@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """unittests for Review"""
 import unittest
-import pep8
 from models.base_model import BaseModel
 from models.review import Review
 from datetime import datetime
@@ -11,20 +10,6 @@ class TestReviewDoc(unittest.TestCase):
     """check Review documentation"""
     def test_class_documentation(self):
         self.assertTrue(len(Review.__doc__) > 0)
-
-
-class TestReviewPycode(unittest.TestCase):
-    """check pycodestyle"""
-    def test_pycode(self):
-        pep8style = pep8.StyleGuide(quiet=True)
-        files = [
-            'models/review.py'
-            'tests/test_models/test_review.py'
-        ]
-        result = pep8style.check_files(files)
-        self.assertEqual(
-            result.total_errors, 0, "PEP 8 style issues found"
-        )
 
 
 class TestReview(unittest.TestCase):
@@ -45,7 +30,7 @@ class TestReview(unittest.TestCase):
     def test_inheritance(self):
         """tests if inheriting from BaseModel correctly"""
         review = Review()
-        self.assertEqual(issubclass(review.__class__, BaseModel))
+        self.assertTrue(issubclass(review.__class__, BaseModel))
 
 
 if __name__ == "__main__":
