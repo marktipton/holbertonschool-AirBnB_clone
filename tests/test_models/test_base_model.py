@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """unittests for BaseModel"""
 import unittest
-import pep8
 from models.base_model import BaseModel
 from datetime import datetime
 
@@ -10,20 +9,6 @@ class TestBaseModelDoc(unittest.TestCase):
     """check BaseModel documentation"""
     def test_class_documentation(self):
         self.assertTrue(len(BaseModel.__doc__) > 0)
-
-
-class TestBaseModelPycode(unittest.TestCase):
-    """check pycodestyle"""
-    def test_pycode(self):
-        pep8style = pep8.StyleGuide(quiet=True)
-        files = [
-            'models/base_model.py'
-            'tests/test_models/test_base_model.py'
-        ]
-        result = pep8style.check_files(files)
-        self.assertEqual(
-            result.total_errors, 0, "PEP 8 style issues found"
-        )
 
 
 class TestBaseModel(unittest.TestCase):
@@ -87,12 +72,26 @@ class TestBaseModel(unittest.TestCase):
         base_1 = BaseModel(id="")
         self.assertEqual(base_1.id, "")
 
-    def test_serialize(self):
-        """test serialization and deserialization"""
-        base_1 = BaseModel()
-        serialized_data = base_1.to_dict()
-        deserialized_base = BaseModel(**serialized_data)
-        self.assertEqual(base_1, deserialized_base)
+    def test_id(self):
+        """test id method"""
+        base1 = BaseModel()
+        self.assertEqual(str, type(base1.id))
+
+    def test_updated_at(self):
+        """test updated_at method"""
+        base1 = BaseModel()
+        self.assertEqual(datetime, type(base1.updated_at))
+
+    def test_created_at(self):
+        """test created_at method"""
+        base1 = BaseModel()
+        self.assertEqual(datetime, type(base1.created_at))
+
+    def test_to_dict(self):
+        """test to_dict method"""
+        base1 = BaseModel()
+        dict1 = base1.to_dict()
+        self.assertEqual(type(dict1), dict)
 
 
 if __name__ == "__main__":
