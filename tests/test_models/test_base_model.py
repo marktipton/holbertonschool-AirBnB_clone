@@ -17,9 +17,13 @@ class TestBasePycode(unittest.TestCase):
     def test_pycodestyle(self):
         """tests pycodestyle"""
         style = pycodestyle.StyleGuide(quiet=True)
+        files = [
+            'models/base_model.py',
+            'tests/test_models/test_base_model.py'
+        ]
+        result = style.check_files(files)
         self.assertEqual(
-            style.check_files(['models/base_model.py']).total_errors,
-            0, "PEP 8 style issues found"
+            result.total_errors, 0, "PEP 8 style issues found"
         )
 
 
