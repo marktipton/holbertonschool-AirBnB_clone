@@ -108,5 +108,6 @@ e.py
 ```
 
 ## Authors
-https://github.com/kier-ious
-https://github.com/marktipton
+- Kier McAlister: https://github.com/kier-ious
+
+- Mark Tipton: https://github.com/marktipton
