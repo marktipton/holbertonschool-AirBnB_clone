@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """unittests for BaseModel"""
 import unittest
+import pycodestyle
 from models.base_model import BaseModel
 from datetime import datetime
 
@@ -9,6 +10,17 @@ class TestBaseModelDoc(unittest.TestCase):
     """check BaseModel documentation"""
     def test_class_documentation(self):
         self.assertTrue(len(BaseModel.__doc__) > 0)
+
+
+class TestBasePycode(unittest.TestCase):
+    """check pycodestyle"""
+    def test_pycodestyle(self):
+        """tests pycodestyle"""
+        style = pycodestyle.StyleGuide(quiet=True)
+        self.assertEqual(
+            style.check_files(['models/base_model.py']).total_errors,
+            0, "PEP 8 style issues found"
+        )
 
 
 class TestBaseModel(unittest.TestCase):

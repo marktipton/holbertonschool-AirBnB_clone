@@ -13,6 +13,17 @@ class TestAmenityDoc(unittest.TestCase):
         self.assertTrue(len(Amenity.__doc__) > 0)
 
 
+class TestAmenityPycode(unittest.TestCase):
+    """check pycodestyle"""
+    def test_pycodestyle(self):
+        """tests pycodestyle"""
+        style = pycodestyle.StyleGuide(quiet=True)
+        self.assertEqual(
+            style.check_files(['models/amenity.py']).total_errors,
+            0, "PEP 8 style issues found"
+        )
+
+
 class TestAmenity(unittest.TestCase):
     """tests for Amenity"""
     def setUp(self):

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """unittests for Review"""
 import unittest
+import pycodestyle
 from models.base_model import BaseModel
 from models.review import Review
 from datetime import datetime
@@ -10,6 +11,17 @@ class TestReviewDoc(unittest.TestCase):
     """check Review documentation"""
     def test_class_documentation(self):
         self.assertTrue(len(Review.__doc__) > 0)
+
+
+class TestReviewPycode(unittest.TestCase):
+    """check pycodestyle"""
+    def test_pycodestyle(self):
+        """tests pycodestyle"""
+        style = pycodestyle.StyleGuide(quiet=True)
+        self.assertEqual(
+            style.check_files(['models/review.py']).total_errors,
+            0, "PEP 8 style issues found"
+        )
 
 
 class TestReview(unittest.TestCase):

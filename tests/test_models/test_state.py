@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """unittests for State"""
 import unittest
-import pep8
+import pycodestyle
 from models.state import State
 from datetime import datetime
 
@@ -10,6 +10,17 @@ class TestStateDoc(unittest.TestCase):
     """check State documentation"""
     def test_class_documentation(self):
         self.assertTrue(len(State.__doc__) > 0)
+
+
+class TestStatePycode(unittest.TestCase):
+    """check pycodestyle"""
+    def test_pycodestyle(self):
+        """tests pycodestyle"""
+        style = pycodestyle.StyleGuide(quiet=True)
+        self.assertEqual(
+            style.check_files(['models/base_model.py']).total_errors,
+            0, "PEP 8 style issues found"
+        )
 
 
 class TestState(unittest.TestCase):
