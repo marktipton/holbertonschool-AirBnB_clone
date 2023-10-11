@@ -42,13 +42,13 @@ Documented commands (type help <topic>):
 ========================================
 EOF  help  quit
 ```
-Typing in the wrong class name or one that doesn't exits, you'll get this output. You want to make sure that the class that you're typing in the console matches exactly.
+- Typing in the wrong class name or one that doesn't exits, you'll get this output. You want to make sure that the class that you're typing in the console matches exactly.
 ```
 (hbnb) create city
 ** class doesn't exist **
 (hbnb)
 ```
-You can then use the City ID and show method to print out string representation of an instance of the specified class.
+- You can then use the City ID and show method to print out string representation of an instance of the specified class.
 ```
 (hbnb) create City
 e023cb3e-9a57-473d-8e0b-e59f2800663f
@@ -56,7 +56,7 @@ e023cb3e-9a57-473d-8e0b-e59f2800663f
 [City] (e023cb3e-9a57-473d-8e0b-e59f2800663f) {'id': 'e023cb3e-9a57-473d-8e0b-e59f2800663f', 'created_at': datetime.datetime(2023, 10, 10, 18, 38, 5, 54484), 'updated_at': datetime.datetime(2023, 10, 10, 18, 38, 5, 54600)}
 (hbnb)
 ```
-You can update the City class while also adding an email address to it. 
+- You can update the City class while also adding an email address to it. 
 ```
 (hbnb) create City
 1cdce72c-ce33-446b-8b5d-91aec020176e
