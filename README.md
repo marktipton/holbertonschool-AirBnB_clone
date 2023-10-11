@@ -3,8 +3,43 @@
 ![815046647d23428a14ca](https://github.com/kier-ious/holbertonschool-AirBnB_clone/assets/128427866/d0e97b32-f5fa-492a-a40b-65ddbb484a7e)
 
 ## Purpose
+We created a mock property managemnt program with a simple command-line interface or, CLI. It is designed to manage various types of objects (users, states, cities) using a simple, text-based interface. The core files include *base_model.py* for defining a common object structure, *file_storage.py* for handling object storage in a JSON file, and model classes derived from the BaseModel. The *console.py* serves as the entry point and offers commands for creating, displaying, updating, and deleting instances of these models. Together, these components enable users to interact with and manage property-related data through the command line, making it a convenient and flexible tool for property management tasks.
 
 ## Files
+```
+.
+├── AUTHORS
+├── README.md
+├── console.py
+├── file.json
+├── models
+│   ├── __init__.py
+│   ├── amenity.py
+│   ├── base_model.py
+│   ├── city.py
+│   ├── engine
+│   │   ├── __init__.py
+│   │   └── file_storage.py
+│   ├── place.py
+│   ├── review.py
+│   ├── state.py
+│   └── user.py
+└── tests
+    ├── __init__.py
+    └── test_models
+        ├── __init__.py
+        ├── test_amenity.py
+        ├── test_base_model.py
+        ├── test_city.py
+        ├── test_engine
+        │   ├── __init__.py
+        │   └── test_file_storage.py
+        ├── test_place.py
+        ├── test_review.py
+        ├── test_state.py
+        └── test_user.py
+
+```
 
 ### `base_model.py`
 
@@ -71,8 +106,7 @@ e.py
 (hbnb) ce86f497-9b18-43ef-9a8c-a4adb816664e
 (hbnb)
 ```
-## Bugs
 
 ## Authors
-
-## License
+https://github.com/kier-ious
+https://github.com/marktipton
