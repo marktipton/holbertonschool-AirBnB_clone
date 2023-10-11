@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """unittests for User"""
 import unittest
-import pep8
+import pycodestyle
 from models.user import User
 from datetime import datetime
 
@@ -10,6 +10,17 @@ class TestUserDoc(unittest.TestCase):
     """check User documentation"""
     def test_class_documentation(self):
         self.assertTrue(len(User.__doc__) > 0)
+
+
+class TestUserPycode(unittest.TestCase):
+    """check pycodestyle"""
+    def test_pycodestyle(self):
+        """tests pycodestyle"""
+        style = pycodestyle.StyleGuide(quiet=True)
+        self.assertEqual(
+            style.check_files(['models/user.py']).total_errors,
+            0, "PEP 8 style issues found"
+        )
 
 
 class TestUser(unittest.TestCase):
