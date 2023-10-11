@@ -31,17 +31,21 @@ This file serves as the entry point for a command-line interface (CLI). It uses 
 - `destroy`: Destroys an instance.
 - `all`: Prints the string representation of all instances of a specified class.
 - `update`: Updates attributes of an instance.
-- 'help': get information about commands or see available commands
+- `help`: get information about commands or see available commands
 
 ## Usage
 
 ### Interactive Mode
 ```
 bash
-(hbnb) create User
-<new_user_id>
-```
+(hbnb) help
 
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
+
+(hbnb)
+```
 ### Non-interactive Mode
 
 ## Bugs
