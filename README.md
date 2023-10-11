@@ -36,6 +36,11 @@ This file serves as the entry point for a command-line interface (CLI). It uses 
 ## Usage
 
 ### Interactive Mode
+```
+bash
+(hbnb) create User
+<new_user_id>
+```
 
 ### Non-interactive Mode
 
