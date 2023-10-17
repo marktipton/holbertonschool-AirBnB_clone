@@ -3,6 +3,7 @@
   height: 70px;
   width: 100%;
   border: 1px solid #DDDDDD;
+  position: relative;
 }
 
 .search-button {
@@ -15,7 +16,8 @@
   border-radius: 4px;
   margin-top: 11px;
   top: 50%;
-  padding-right: 30px;
+  right: 30px;
+  position: absolute;
 }
 
 .search-button:hover {
