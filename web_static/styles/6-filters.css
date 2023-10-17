@@ -47,3 +47,67 @@
   margin-top: -10px;
   margin-left: 50px;
 }
+
+.locations .popover {
+  display: none;
+  background-color: #FAFAFA;
+  width: 100%;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  list-style: none;
+  padding: 0;
+}
+
+.locations .popover > li {
+  display: block;
+  color: #484848;
+  margin: 0;
+}
+
+.locations .popover h2 {
+  font-size: 16px;
+}
+
+.locations .cities li {
+  display: block;
+  color: #484848;
+  margin: 0;
+}
+
+.locations:hover .popover {
+  display: block;
+}
+
+.locations .popover:hover {
+  display: block;
+}
+
+.amenities .popover {
+  display: none;
+  background-color: #FAFAFA;
+  width: 100%;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  list-style: none;
+  padding: 0;
+}
+
+.amenities .popover > li {
+  display: block;
+  color: #484848;
+  margin: 0;
+}
+
+.amenities li {
+  display: block;
+  color: #484848;
+  margin: 0;
+}
+
+.amenities:hover .popover {
+  display: block;
+}
+
+.amenities .popover:hover {
+  display: block;
+}
