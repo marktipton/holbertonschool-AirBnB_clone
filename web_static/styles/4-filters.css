@@ -4,6 +4,8 @@
   width: 100%;
   border: 1px solid #DDDDDD;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .search-button {
@@ -14,8 +16,7 @@
   width: 20%;
   border: none;
   border-radius: 4px;
-  margin-top: 11px;
-  top: 50%;
+  margin: center;
   right: 30px;
   position: absolute;
 }
